@@ -116,7 +116,24 @@ func (o *orgYAML) dump(ind int, buff io.Writer) error {
 	}
 
 	for _, sf := range o.subFolders {
-		err = sf.dump(ind + defaultIndentSize, buff)
+		err = sf.dump(ind+defaultIndentSize, buff)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+// draw adds the org to a diagram
+func (o *orgYAML) draw(d *diagram) error {
+	indent := strings.Repeat(" ", ind)
+	_, err := fmt.Fprintf(buff, "%s%s.%s (\"%s\")\n", indent, Organization, o.Spec.Id, o.Spec.DisplayName)
+	if err != nil {
+		return err
+	}
+
+	for _, sf := range o.subFolders {
+		err = sf.dump(ind+defaultIndentSize, buff)
 		if err != nil {
 			return err
 		}

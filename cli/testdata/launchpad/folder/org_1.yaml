@@ -5,3 +5,5 @@ spec:
   folders:
     - id: "group1"
       displayName: "group1"
+    - id: "group2"
+      displayName: "group2"
