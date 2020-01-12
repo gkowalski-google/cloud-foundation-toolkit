@@ -142,8 +142,10 @@ func (f *folderYAML) draw(dg *diagramGroup, parent *diagramCard) error {
 
 	dg.addPath(parent, newCard, "-->")
 
-	// for _, sf := range o.subFolders {
-	// 	err = sf.draw(newGroup)
+	// TODO(morgantep): add once https://github.com/GoogleCloudPlatform/cloud-foundation-toolkit/issues/535 is fixed
+	// for _, sf := range f.subFolders {
+	// 	fmt.Printf("subfolder!", sf.Spec.Id)
+	// 	// err = sf.draw(newGroup)
 	// 	if err != nil {
 	// 		return err
 	// 	}
