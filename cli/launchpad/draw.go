@@ -112,14 +112,23 @@ func (d *diagram) String() string {
 	return buff.String()
 }
 
-// draw generates diagram(s) for a given org
-func (ao *assembledOrg) draw() error {
+func (ao *assembledOrg) makeDiagram() (*diagram, error) {
 	orgDiagram := &diagram{}
 	orgDiagram.group = &diagramGroup{
 		d: orgDiagram,
 	}
 
 	ao.org.draw(orgDiagram.group, nil)
+
+	return orgDiagram, nil
+}
+
+// draw prints diagram(s) for a given org
+func (ao *assembledOrg) draw() error {
+	orgDiagram, err := ao.makeDiagram()
+	if err != nil {
+		return err
+	}
 
 	print(orgDiagram.String())
 
