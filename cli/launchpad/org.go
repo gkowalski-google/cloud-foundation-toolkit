@@ -125,15 +125,18 @@ func (o *orgYAML) dump(ind int, buff io.Writer) error {
 }
 
 // draw adds the org to a diagram
-func (o *orgYAML) draw(d *diagram) error {
-	indent := strings.Repeat(" ", ind)
-	_, err := fmt.Fprintf(buff, "%s%s.%s (\"%s\")\n", indent, Organization, o.Spec.Id, o.Spec.DisplayName)
+func (o *orgYAML) draw(dg *diagramGroup, parent *diagramCard) error {
+	newGroup, err := dg.addGroup("organization")
+	if err != nil {
+		return err
+	}
+	newCard, err := newGroup.addCard("org", "organization")
 	if err != nil {
 		return err
 	}
 
 	for _, sf := range o.subFolders {
-		err = sf.dump(ind+defaultIndentSize, buff)
+		err = sf.draw(newGroup, newCard)
 		if err != nil {
 			return err
 		}

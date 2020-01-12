@@ -28,7 +28,7 @@ func NewGenerate(rawPaths []string, outFlavor OutputFlavor, outputDir string) {
 
 	switch outFlavor {
 	case Drawing:
-		print("Diagram")
+		assembled.draw()
 	default:
 		print(assembled.String()) // Place-holder for future trigger point of code generation
 	}
